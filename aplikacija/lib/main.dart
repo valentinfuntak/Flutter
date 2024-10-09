@@ -32,11 +32,23 @@ class Gumb extends StatelessWidget {
   }
 }
 
-class Obrazac extends StatelessWidget {
-  Obrazac({super.key});
+class Obrazac extends StatefulWidget {
+  const Obrazac({super.key});
 
+  @override
+  _ObrazacState createState() => _ObrazacState();
+}
+
+class _ObrazacState extends State<Obrazac> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController surnameController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    surnameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +88,27 @@ class Obrazac extends StatelessWidget {
               },
               child: Text('Potvrdi'))
         ],
+      ),
+    );
+  }
+}
+
+class PrikazPodataka extends StatefulWidget {
+  final String ime;
+  final String prezime;
+
+  const PrikazPodataka({required this.ime, required this.prezime, super.key});
+
+  @override
+  State<PrikazPodataka> createState() => _PrikazPodatakaState();
+}
+
+class _PrikazPodatakaState extends State<PrikazPodataka> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Prikaz podataka"),
       ),
     );
   }
