@@ -50,6 +50,16 @@ class _ObrazacState extends State<Obrazac> {
     super.dispose();
   }
 
+  void _sendData() {
+    String name = nameController.text;
+    String surname = surnameController.text;
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PrikazPodataka(ime: name, prezime: surname)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -80,13 +90,7 @@ class _ObrazacState extends State<Obrazac> {
           const SizedBox(
             height: 16,
           ),
-          ElevatedButton(
-              onPressed: () {
-                String ime = nameController.text;
-                String prezime = surnameController.text;
-                debugPrint("Ime $ime, Prezime: $prezime");
-              },
-              child: Text('Potvrdi'))
+          ElevatedButton(onPressed: _sendData, child: const Text('Potvrdi'))
         ],
       ),
     );
@@ -109,6 +113,33 @@ class _PrikazPodatakaState extends State<PrikazPodataka> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Prikaz podataka"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Prezime: ${widget.prezime}',
+              style: const TextStyle(fontSize: 22),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Ime ${widget.ime}',
+              style: const TextStyle(fontSize: 22),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Nazad"))
+          ],
+        ),
       ),
     );
   }
